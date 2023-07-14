@@ -92,9 +92,6 @@ function filterText(){
         var list = document.getElementById("projectList");
         var filterT = document.getElementById("TextF");
 
-        //Label
-        filterT.innerHTML = "Below is the project you searched for :";
-
         list.replaceChildren();
       
         //To obtain the project the user searched for 
