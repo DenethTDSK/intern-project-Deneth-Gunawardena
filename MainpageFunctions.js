@@ -89,7 +89,7 @@ function filterText(){
         var storage = document.getElementById("User").value;
         //Changes user input to lowercase so anything the user enters it can be searched
         storage = storage.toLowerCase();
-        var list = document.getElementById("Filter");
+        var list = document.getElementById("projectList");
         var filterT = document.getElementById("TextF");
 
         //Label
