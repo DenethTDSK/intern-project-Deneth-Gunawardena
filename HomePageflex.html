@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <!--Heading-->
+     <h1><b>Project Management System</b></h1>
+
+     <!--Inline css-->
+     <!--<style>
+        body{background-color: cornflowerblue;}
+        h1{background-color: darkblue;}
+        p{background-color:darkblue;}
+     </style>-->
+
+     <!--importing external css file -->
+     <link rel="stylesheet" href="PageStyles.css">
+
+</head>
+
+<script src ="MainpageFunctions.js">
+    
+</script>
+
+<body>
+   <!--The text-->
+   <p style="text-align:left;">Project:</p>
+
+   <!--The text box and allows to save what the user types-->
+   <input type="text" id="User" placeholder="Search">
+   
+   <!--To have the button on a new line-->
+   <br> <br>
+
+   <!--The find button-->
+   <button type="button" onclick= "showAll()" class="button">Show list</button>
+   <button type="button" onclick="Hide()" class="button">Hide List</button>
+   <button type="button" onclick="filterText()" class="button">Filter</button>
+   
+   <br>
+   <p id="TextL"></p>
+   <div id="projectList" class="flex-Container + underline" > </div>
+
+   <br>
+   <p id="TextF"></p>
+   <div id="Filter" class="flex-Container + underline"></div>
+
+
+</body>
+</html>

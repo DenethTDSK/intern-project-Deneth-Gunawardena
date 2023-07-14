@@ -1,0 +1,40 @@
+/* Changing the color */
+body{background-color: cornflowerblue;}
+h1{background-color:deepskyblue; color: darkblue;}
+p{background-color:deepskyblue; color: darkblue;}
+
+
+
+/* Grid */
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color:#00d5ff;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+
+.flex-Container{
+    display: flex;
+    background-color:deepskyblue;
+    flex-direction: column;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* border */
+.underline{ 
+   border: darkblue;
+   border-style:ridge;
+  } 
+
+.button{
+    background-color: deepskyblue;
+    color: darkblue;
+    font-size: medium;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: dodgerblue;
+    color: black;
+}
