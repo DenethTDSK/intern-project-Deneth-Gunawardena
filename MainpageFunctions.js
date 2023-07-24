@@ -97,11 +97,11 @@ function filterText(){
         //To obtain the project the user searched for 
         for (var loop = 0; loop < 8; loop++) {
              var div2 = document.createElement("div");
-             div2.innerHTML = data.projects[loop].name;
+             div2.innerHTML = data.projects[loop].id+" "+data.projects[loop].name;
              //If userinput is there in the name of project, if yes then output
              if (div2.innerHTML.toLowerCase().includes(storage) || storage ===""){
                  list.appendChild(div2);
-                 console.log("The project - "+data.projects[loop].name+" Has been searched")
+                 console.log("The project - "+data.projects[loop].id+" "+data.projects[loop].name+" Has been searched")
                 } 
                 else{
                     console.log("The data - "+data.projects[loop].name+" has been filtred out")
