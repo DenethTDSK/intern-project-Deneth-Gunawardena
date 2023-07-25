@@ -113,3 +113,30 @@ function filterText(){
    
 }
 
+let num = 8;
+
+function addProject(){
+    //when code has to be expanded 
+    fetch('Projects.json')
+
+    .then(function (response) {
+        return response.json();
+    })
+
+    .then(function(data){
+
+        //where the user inputs and where the user value will be seen in the website 
+
+        var storage = document.getElementById("User").value;
+        var list =document.getElementById("projectList");
+
+        num = num + 1
+        
+        list.innerHTML += (num+" "+storage );
+
+      ;
+
+        //console.log(storage);
+    })
+}
+
