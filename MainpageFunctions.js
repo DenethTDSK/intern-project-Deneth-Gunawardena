@@ -34,7 +34,7 @@ function showInfo(data){
     for (var i = 0; i < 8; i++) {
         //temp placeholder
         var div = document.createElement("div");
-        div.innerHTML = data.projects[i].id + " "+data.projects[i].name +" "+"<button type="+"button"+" onclick="+" class = "+" button"+">Remove</button>";
+        div.innerHTML = data.projects[i].id + " "+data.projects[i].name +" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class = "+" button2"+">Remove</button>";
 
         storeP.appendChild(div);
         console.log("display project list status - is working");
@@ -97,7 +97,7 @@ function filterText(){
         //To obtain the project the user searched for 
         for (var loop = 0; loop < 8; loop++) {
              var div2 = document.createElement("div");
-             div2.innerHTML = data.projects[loop].id+" "+data.projects[loop].name+" "+"<button type="+"button"+" onclick="+" class = "+" button"+">Remove</button>";
+             div2.innerHTML = data.projects[loop].id+" "+data.projects[loop].name+" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class = "+" button2"+">Remove</button>";
              //If userinput is there in the name of project, if yes then output
              if (div2.innerHTML.toLowerCase().includes(storage) || storage ===""){
                  list.appendChild(div2);
@@ -125,7 +125,7 @@ function addProject(){
 
     .then(function(data){
 
-        //where the user inputs and where the user value will be seen in the website 
+        //where the user inputs and where the user value will be seen in the website with the buttons 
 
         var storage = document.getElementById("User").value;
         var list =document.getElementById("projectList");
@@ -134,12 +134,19 @@ function addProject(){
 
         var div3 = document.createElement("div");
         
-        div3.innerHTML += (num+" "+storage+" "+"<button type="+"button"+" onclick="+" class="+"button"+">Remove</button>" +"<br>");
+        div3.innerHTML += (num+" "+storage+" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class="+"button2"+">Remove</button>" +"<br>");
 
         list.appendChild(div3);
       ;
 
         //console.log(storage);
     })
+}
+
+//to all user to remove a project
+function removeProject(){
+    console.log("It works");
+
+    
 }
 

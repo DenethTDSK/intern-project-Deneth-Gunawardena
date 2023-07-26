@@ -34,7 +34,22 @@ p{background-color:deepskyblue; color: darkblue;}
     transition-duration: 0.4s;
     cursor: pointer;
 }
+
+.button2{
+    background-color:dodgerblue;
+    color: darkblue;
+    font-size: medium;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+
 .button:hover{
     background-color: dodgerblue;
+    color: black;
+}
+
+.button2:hover{
+    background-color: deepskyblue;
     color: black;
 }
