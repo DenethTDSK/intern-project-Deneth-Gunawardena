@@ -34,7 +34,7 @@ function showInfo(data){
     for (var i = 0; i < 8; i++) {
         //temp placeholder
         var div = document.createElement("div");
-        div.innerHTML = data.projects[i].id + " "+data.projects[i].name;
+        div.innerHTML = data.projects[i].id + " "+data.projects[i].name +" "+"<button type="+"button"+" onclick="+" class = "+" button"+">Remove</button>";
 
         storeP.appendChild(div);
         console.log("display project list status - is working");
@@ -97,7 +97,7 @@ function filterText(){
         //To obtain the project the user searched for 
         for (var loop = 0; loop < 8; loop++) {
              var div2 = document.createElement("div");
-             div2.innerHTML = data.projects[loop].id+" "+data.projects[loop].name;
+             div2.innerHTML = data.projects[loop].id+" "+data.projects[loop].name+" "+"<button type="+"button"+" onclick="+" class = "+" button"+">Remove</button>";
              //If userinput is there in the name of project, if yes then output
              if (div2.innerHTML.toLowerCase().includes(storage) || storage ===""){
                  list.appendChild(div2);
@@ -131,9 +131,12 @@ function addProject(){
         var list =document.getElementById("projectList");
 
         num = num + 1
-        
-        list.innerHTML += (num+" "+storage );
 
+        var div3 = document.createElement("div");
+        
+        div3.innerHTML += (num+" "+storage+" "+"<button type="+"button"+" onclick="+" class="+"button"+">Remove</button>" +"<br>");
+
+        list.appendChild(div3);
       ;
 
         //console.log(storage);
