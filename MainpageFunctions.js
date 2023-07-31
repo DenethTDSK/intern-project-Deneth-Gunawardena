@@ -18,9 +18,6 @@ function showAll(){
 //id counter
 let num = 0;
 
-
-
-
 //To display data to website
 function showInfo(data){
     // to remove previous list 
@@ -121,9 +118,9 @@ function filterText(){
 }
 
 
-
+//add project to list 
 function addProject(){
-    //when code has to be expanded 
+    //when code has to be expanded to add to json later
     fetch('Projects.json')
 
     .then(function (response) {
@@ -132,7 +129,7 @@ function addProject(){
 
     .then(function(data){
 
-        //where the user inputs and where the user value will be seen in the website with the buttons 
+        //where the user inputs and where the user value will be seen in the website list when the button is clicked
 
         var storage = document.getElementById("User").value;
         var list =document.getElementById("projectList");
@@ -168,14 +165,17 @@ function removeProject(num){
       
         for (let r = 0; r < 8; r++) {
 
+            //to see if the loop is wokring 
             console.log(r);
           
+            //to remove the project the user has selected
             if (r == num){
 
                  //check function works
                  console.log("removing "+data.projects[r].id+" "+data.projects[r].name);
                  
-                
+                // methord to remove it
+
                 //delete(data.projects[r].id);
                 //delete(data.projects[r].name);
 
@@ -188,6 +188,8 @@ function removeProject(num){
             
             
         }
+
+        // display list after the change is done
 
         for (let display = 0; display < 8; display++) {
 
