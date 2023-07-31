@@ -15,6 +15,11 @@ function showAll(){
     })
 }
 
+//id counter
+let num = 0;
+
+
+
 
 //To display data to website
 function showInfo(data){
@@ -34,10 +39,12 @@ function showInfo(data){
     for (var i = 0; i < 8; i++) {
         //temp placeholder
         var div = document.createElement("div");
-        div.innerHTML = data.projects[i].id + " "+data.projects[i].name +" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class = "+" button2"+">Remove</button>";
+        div.innerHTML = data.projects[i].id + " "+data.projects[i].name +" "+"<button type="+"button"+" onclick= "+"removeProject("+num+")"+" class = "+" button2"+">Remove</button>";
 
         storeP.appendChild(div);
         console.log("display project list status - is working");
+
+        num = num + 1;
     }
 }
 
@@ -113,7 +120,7 @@ function filterText(){
    
 }
 
-let num = 8;
+
 
 function addProject(){
     //when code has to be expanded 
@@ -143,9 +150,55 @@ function addProject(){
     })
 }
 
+
+
 //to all user to remove a project
-function removeProject(){
-    console.log("It works");
+function removeProject(num){
+    fetch('Projects.json')
+
+    .then(function (response) {
+        return response.json();
+    })
+
+
+    .then(function(data){
+
+        var list2 = document.getElementById("projectList");
+    
+      
+        for (let r = 0; r < 8; r++) {
+
+            console.log(r);
+          
+            if (r == num){
+
+                 //check function works
+                 console.log("removing "+data.projects[r].id+" "+data.projects[r].name);
+                 
+                
+                //delete(data.projects[r].id);
+                //delete(data.projects[r].name);
+
+                //data.projects.splice(1);
+
+                //list2.remove(data.projects[r].id + data.projects[r].name)
+               
+            }
+          
+            
+            
+        }
+
+        for (let display = 0; display < 8; display++) {
+
+            var div4 = document.createElement("div")
+
+            div4.innerHTML = data.projects[display].id + " "+data.projects[display].name +" "+"<button type="+"button"+" onclick= "+"removeProject("+num+")"+" class = "+" button2"+">Remove</button>";
+            list2.appendChild(div4);
+        }
+    
+        })
+
 
     
 }
