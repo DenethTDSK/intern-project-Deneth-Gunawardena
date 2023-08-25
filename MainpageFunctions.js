@@ -7,16 +7,49 @@ function showAll(){
     })
     
     .then(function (data) {
-        checkInfo(data);
-        showInfo(data);
-        logText(data);
-    
-      
+        checkInfo(data); //to check if information can be seen in console
+        storeList(data);//to store the json in one comman array
+        showInfo(data); // to show the list when user wants to see the list
+        logText(data); // to see if serach bad works
+        
     })
 }
 
+
 //id counter
 let num = 0;
+
+//storage of projects in json file and newly created projects
+var projectsList = [];
+
+//To store only the names of projects
+var projectNames = [];
+
+//storage of project loation when we have to remove one
+var projectLocation = [];
+
+let projectsSize = 0;
+
+//to store in main list 
+function storeList(data){
+
+    for (var st = 0; st < 8; st++) {
+      
+        projectsList.push(data.projects[st].id + " "+ data.projects[st].name);
+
+        projectLocation.push(num);
+
+        projectNames.push(data.projects[st].name);
+        
+        num = num + 1;
+
+    
+    }
+
+    projectsSize = projectsList.length;
+
+    console.log("project list stored,"+" size of projects is - "+projectsSize);
+}
 
 //To display data to website
 function showInfo(data){
@@ -32,22 +65,30 @@ function showInfo(data){
     //So that the projects wont duplicate once the button is clicked again
     storeP.replaceChildren();
 
+
     //for loop to show each data row by row
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < projectsSize; i++) {
         //temp placeholder
         var div = document.createElement("div");
-        div.innerHTML = data.projects[i].id + " "+data.projects[i].name +" "+"<button type="+"button"+" onclick= "+"removeProject("+num+")"+" class = "+" button2"+">Remove</button>";
+        div.innerHTML = projectsList[i]+" "+"<button type="+"button"+" onclick= "+"removeProject("+i+")"+" class = "+" button2"+">Remove</button>";
+
+        
 
         storeP.appendChild(div);
         console.log("display project list status - is working");
 
-        num = num + 1;
+       
     }
+
+
+    
 }
 
 //to see is the data is visible in console 
-function checkInfo(data){
-    console.table(data.projects);  
+function checkInfo(){
+    console.table(projectsList); 
+    console.table(projectNames);
+    console.table(projectLocation);
 }
 
 function logText(data){
@@ -67,7 +108,7 @@ function logText(data){
  //alert(storage);
 
  //to check it works
- console.log("Alert function "+ storage )
+ console.log("Alert function user has entered "+ storage )
 
 }
 
@@ -82,13 +123,6 @@ function Hide(){
 //When the user serches for a project with the name 
 function filterText(){
 
-    fetch('Projects.json')
-
-    .then(function (response) {
-        return response.json();
-    })
-
-    .then(function (data) {
         
         var storage = document.getElementById("User").value;
         //Changes user input to lowercase so anything the user enters it can be searched
@@ -99,109 +133,107 @@ function filterText(){
         list.replaceChildren();
       
         //To obtain the project the user searched for 
-        for (var loop = 0; loop < 8; loop++) {
+        for (var loop = 0; loop < projectsSize; loop++) {
              var div2 = document.createElement("div");
-             div2.innerHTML = data.projects[loop].id+" "+data.projects[loop].name+" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class = "+" button2"+">Remove</button>";
+             div2.innerHTML =projectNames[loop]+" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class = "+" button2"+">Remove</button>";
              //If userinput is there in the name of project, if yes then output
              if (div2.innerHTML.toLowerCase().includes(storage) || storage ===""){
                  list.appendChild(div2);
-                 console.log("The project - "+data.projects[loop].id+" "+data.projects[loop].name+" Has been searched")
+                 console.log("The project - "+projectsList[loop]+" Has been searched")
                 } 
                 else{
-                    console.log("The data - "+data.projects[loop].name+" has been filtred out")
+                    console.log("The data - "+projectsList[loop]+" has been filtred out")
                 }
         }
         
-    })
+
 
    
 }
 
 
 //add project to list 
-function addProject(){
-    //when code has to be expanded to add to json later
-    fetch('Projects.json')
-
-    .then(function (response) {
-        return response.json();
-    })
-
-    .then(function(data){
+function addProject(data){
 
         //where the user inputs and where the user value will be seen in the website list when the button is clicked
-
         var storage = document.getElementById("User").value;
         var list =document.getElementById("projectList");
 
-        num = num + 1
+        if (storage == ""){
+            alert("Please enter a project name")
+            return false;
+        }
 
-        var div3 = document.createElement("div");
-        
-        div3.innerHTML += (num+" "+storage+" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class="+"button2"+">Remove</button>" +"<br>");
+        else{
+            projectsSize = projectsSize + 1;
 
-        list.appendChild(div3);
-      ;
+           // var div3 = document.createElement("div");
+
+            projectLocation.push(projectsSize);
+
+            projectsList.push( projectsSize +" "+storage);
+
+            console.table(projectsList)
+            
+            refreshList();
+           
+            //div3.innerHTML = (num+" "+storage+" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class="+"button2"+">Remove</button>" +"<br>");
+    
+            //list.appendChild(div3);    
+        }
 
         //console.log(storage);
-    })
+    
 }
 
 
 
 //to all user to remove a project
-function removeProject(num){
-    fetch('Projects.json')
+//I pass the index value to here and the placeholder projectIndex holds it 
+function removeProject(projectIndex) {
+    //&& is an AND which means both requirments need to be met
+    if (projectIndex >= 0 && projectIndex < projectsList.length) {
+        // Remove the project from the list
+        projectsList.splice(projectIndex, 1); 
 
-    .then(function (response) {
-        return response.json();
-    })
+        // Remove its location from the projectLocation array
+        projectLocation.splice(projectIndex, 1);
+        
+        // Remove the name from the projectNames array
+        projectNames.splice(projectIndex, 1); 
 
+        // Decrement the projectsSize
+        projectsSize = projectsSize - 1; 
 
-    .then(function(data){
-
-        var list2 = document.getElementById("projectList");
-    
-      
-        for (let r = 0; r < 8; r++) {
-
-            //to see if the loop is wokring 
-            console.log(r);
-          
-            //to remove the project the user has selected
-            if (r == num){
-
-                 //check function works
-                 console.log("removing "+data.projects[r].id+" "+data.projects[r].name);
-                 
-                // methord to remove it
-
-                //delete(data.projects[r].id);
-                //delete(data.projects[r].name);
-
-                //data.projects.splice(1);
-
-                //list2.remove(data.projects[r].id + data.projects[r].name)
-               
-            }
-          
-            
-            
-        }
-
-        // display list after the change is done
-
-        for (let display = 0; display < 8; display++) {
-
-            var div4 = document.createElement("div")
-
-            div4.innerHTML = data.projects[display].id + " "+data.projects[display].name +" "+"<button type="+"button"+" onclick= "+"removeProject("+num+")"+" class = "+" button2"+">Remove</button>";
-            list2.appendChild(div4);
-        }
-    
-        })
-
-
-    
+        // Refresh the displayed list
+        refreshList(); 
+    } 
+    //To know if the function isnt working 
+    else {
+        console.log("Invalid project index");
+    }
 }
+
+
+//to refresh the list after removing an object
+function refreshList(){
+
+    var list3 =document.getElementById("projectList");
+
+    list3.textContent = " ";
+
+    for (let refresh = 0; refresh < projectsSize; refresh++) {
+        var div5 = document.createElement("div");
+        div5.innerHTML = projectsList[refresh]+" "+"<button type="+"button"+" onclick= "+"removeProject("+refresh+")"+" class = "+" button2"+">Remove</button>";
+        
+        list3.appendChild(div5);
+        
+    }
+
+    
+       
+}
+
+    
+
 
