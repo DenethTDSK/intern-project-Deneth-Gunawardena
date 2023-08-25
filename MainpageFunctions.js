@@ -40,13 +40,15 @@ function storeList(data){
 
     for (var st = 0; st < 8; st++) {
       
+        num = num + 1;
+
         projectsList.push(data.projects[st].id + " "+ data.projects[st].name);
 
         projectLocation.push(num);
 
         projectNames.push(data.projects[st].name);
         
-        num = num + 1;
+        
 
     
     }
@@ -76,7 +78,7 @@ function showInfo(data){
     for (var i = 0; i < projectsSize; i++) {
         //temp placeholder
         var div = document.createElement("div");
-        div.innerHTML = projectsList[i]+" "+"<button type="+"button"+" onclick= "+"removeProject("+i+")"+" class = "+" button2"+">Remove</button>";
+        div.innerHTML = projectsList[i]+" "+"<button type="+"button"+" onclick= "+"removeProject("+i+")"+" class = "+" button2"+">Remove</button>"+"   "+"<button type="+"button"+" onclick= "+"editProject("+i+")"+" class = "+" button2"+">Edit</button>";
 
         
 
@@ -143,7 +145,7 @@ function filterText(){
         //To obtain the project the user searched for 
         for (var loop = 0; loop < projectsSize; loop++) {
              var div2 = document.createElement("div");
-             div2.innerHTML =projectNames[loop]+" "+"<button type="+"button"+" onclick= "+"removeProject()"+" class = "+" button2"+">Remove</button>";
+             div2.innerHTML =projectNames[loop]+" "+"<button type="+"button"+" onclick= "+"removeProject("+i+")"+" class = "+" button2"+">Remove</button>"+"   "+"<button type="+"button"+" onclick= "+"editProject("+i+")"+" class = "+" button2"+">Edit</button>";
              //If userinput is there in the name of project, if yes then output
              if (div2.innerHTML.toLowerCase().includes(storage) || storage ===""){
                  list.appendChild(div2);
@@ -222,7 +224,32 @@ function removeProject(projectIndex) {
     }
 }
 
+//To change name of existing projects 
+function editProject(projectIndex) {
 
+     //&& is an AND which means both requirments need to be met
+    if (projectIndex >= 0 && projectIndex < projectsList.length) {
+        //gives a pop up message to allow user to change the name
+        var newProjectName = prompt("Enter the new project name:");
+
+        //if user clicks cancel
+        if (newProjectName !== null) {
+
+            // Update the projectsList array
+            projectsList[projectIndex] = projectLocation[projectIndex] + " " + newProjectName;
+
+            // Update the projectNames array
+            projectNames[projectIndex] = newProjectName;
+
+            // Refresh the displayed list
+            refreshList();
+        }
+    } 
+    //Incase edit project function doesnt work
+    else {
+        console.log("Invalid project index");
+    }
+}
 
 
 //to refresh the list after removing an object
@@ -234,7 +261,7 @@ function refreshList(){
 
     for (let refresh = 0; refresh < projectsSize; refresh++) {
         var div5 = document.createElement("div");
-        div5.innerHTML = projectsList[refresh]+" "+"<button type="+"button"+" onclick= "+"removeProject("+refresh+")"+" class = "+" button2"+">Remove</button>";
+        div5.innerHTML = projectsList[refresh]+" "+"<button type="+"button"+" onclick= "+"removeProject("+refresh+")"+" class = "+" button2"+">Remove</button>"+"   "+"<button type="+"button"+" onclick= "+"editProject("+refresh+")"+" class = "+" button2"+">Edit</button>";
         
         list3.appendChild(div5);
         
