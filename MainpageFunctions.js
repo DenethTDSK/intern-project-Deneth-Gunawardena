@@ -33,6 +33,11 @@ let projectsSize = 0;
 //to store in main list 
 function storeList(data){
 
+    //when the list is hidden and then shown again
+    projectsList = [];
+    projectNames = [];
+    projectLocation = [];
+
     for (var st = 0; st < 8; st++) {
       
         projectsList.push(data.projects[st].id + " "+ data.projects[st].name);
@@ -57,14 +62,15 @@ function showInfo(data){
     document.getElementById("projectList").value = " "
     //div to display 
     var storeP = document.getElementById("projectList");
+
+    //So that the projects wont duplicate once the button is clicked again
+    storeP.innerHTML = " ";
+
     var textL = document.getElementById("TextL");
 
     //Label
     textL.innerHTML = "Below is all the projects";
-    
-    //So that the projects wont duplicate once the button is clicked again
-    storeP.replaceChildren();
-
+   
 
     //for loop to show each data row by row
     for (var i = 0; i < projectsSize; i++) {
@@ -120,6 +126,8 @@ function Hide(){
     Lable.replaceChildren();
 }
 
+
+
 //When the user serches for a project with the name 
 function filterText(){
 
@@ -130,7 +138,7 @@ function filterText(){
         var list = document.getElementById("projectList");
         var filterT = document.getElementById("TextF");
 
-        list.replaceChildren();
+        list.innerHTML = " ";
       
         //To obtain the project the user searched for 
         for (var loop = 0; loop < projectsSize; loop++) {
