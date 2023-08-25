@@ -223,6 +223,8 @@ function removeProject(projectIndex) {
 }
 
 
+
+
 //to refresh the list after removing an object
 function refreshList(){
 
